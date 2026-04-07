@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dut6lox2jlxxt"]
+
+[ext_resource type="Script" uid="uid://lji0pgoi5lsw" path="res://core/game.gd" id="1_8xnxh"]
+[ext_resource type="Texture2D" uid="uid://du2j6o371odhp" path="res://assets/environment/grasstest2.png" id="1_d3un6"]
+[ext_resource type="Script" uid="uid://bm3vtlw2a5w57" path="res://core/camera.gd" id="2_5sg27"]
+[ext_resource type="PackedScene" uid="uid://dntbsv51elgtr" path="res://core/troop.tscn" id="4_a04qp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3un6"]
+bg_color = Color(0.07058824, 0.1254902, 0.1254902, 1)
+border_width_top = 5
+border_color = Color(0.14117648, 0.32156864, 0.23137255, 1)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_a04qp"]
+vertices = PackedVector2Array(2379.3906, 1537.6172, -1821.8281, 1901.4297, -3207.6484, -1133.6484, 3600.5781, -2488.9297)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3222, -1141, -1828, 1912, 2387, 1547, 3615, -2502)])
+
+[node name="Game" type="Node2D" unique_id=1117438071]
+script = ExtResource("1_8xnxh")
+
+[node name="BG" type="Sprite2D" parent="." unique_id=644458228]
+z_index = -4096
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(3, 3)
+texture = ExtResource("1_d3un6")
+region_enabled = true
+region_rect = Rect2(0, 0, 1200, 600)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1237496742]
+script = ExtResource("2_5sg27")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1107887040]
+
+[node name="UIContainer" type="PanelContainer" parent="CanvasLayer" unique_id=264141552]
+anchors_preset = -1
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d3un6")
+
+[node name="Troop" parent="." unique_id=1026544554 instance=ExtResource("4_a04qp")]
+position = Vector2(-1006, 60)
+
+[node name="Troop2" parent="." unique_id=647786002 instance=ExtResource("4_a04qp")]
+position = Vector2(205, 113)
+team = false
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=875747490]
+navigation_polygon = SubResource("NavigationPolygon_a04qp")

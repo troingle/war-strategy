@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dntbsv51elgtr"]
+
+[ext_resource type="Script" uid="uid://8qsqfq1efruc" path="res://core/troop.gd" id="1_ovm5h"]
+[ext_resource type="Texture2D" uid="uid://dqag2gstjc1qu" path="res://assets/troops/peasant.png" id="2_ege1t"]
+[ext_resource type="Shader" uid="uid://1qv571fic2qw" path="res://core/outline.gdshader" id="2_y23bv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y23bv"]
+shader = ExtResource("2_y23bv")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/thickness = 1.0
+shader_parameter/tolerance = 0.0
+shader_parameter/diagonals = false
+shader_parameter/rounded = false
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y23bv"]
+size = Vector2(5, 5)
+
+[node name="Troop" type="CharacterBody2D" unique_id=1026544554 groups=["entity"]]
+script = ExtResource("1_ovm5h")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=450119911]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1798422576]
+texture_filter = 1
+material = SubResource("ShaderMaterial_y23bv")
+scale = Vector2(3, 3)
+texture = ExtResource("2_ege1t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=420612918]
+position = Vector2(0, 15)
+shape = SubResource("RectangleShape2D_y23bv")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1449852319]
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
