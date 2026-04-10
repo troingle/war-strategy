@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dpumi7eupplng"]
+
+[ext_resource type="Script" uid="uid://oiwc1gqvoyhf" path="res://core/crystal.gd" id="1_o3ssc"]
+[ext_resource type="Texture2D" uid="uid://dakb1kxubruqu" path="res://assets/misc/crystal.png" id="2_nm64a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o3ssc"]
+size = Vector2(78, 75)
+
+[node name="Crystal" type="StaticBody2D" unique_id=607622113 groups=["base", "entity"]]
+script = ExtResource("1_o3ssc")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=734679272]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_nm64a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=904906582]
+position = Vector2(0, 37.5)
+shape = SubResource("RectangleShape2D_o3ssc")

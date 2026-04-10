@@ -15,9 +15,9 @@ func _unhandled_input(event):
 			last_mouse_pos = get_viewport().get_mouse_position()
 			
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			zoom_camera(1 - zoom_speed)
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom_camera(1 + zoom_speed)
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom_camera(1 - zoom_speed)
 
 	elif event is InputEventMouseMotion and dragging:
 		var mouse_pos = get_viewport().get_mouse_position()

@@ -3,17 +3,20 @@
 [ext_resource type="Script" uid="uid://lji0pgoi5lsw" path="res://core/game.gd" id="1_8xnxh"]
 [ext_resource type="Texture2D" uid="uid://du2j6o371odhp" path="res://assets/environment/grasstest2.png" id="1_d3un6"]
 [ext_resource type="Script" uid="uid://bm3vtlw2a5w57" path="res://core/camera.gd" id="2_5sg27"]
-[ext_resource type="PackedScene" uid="uid://dntbsv51elgtr" path="res://core/troop.tscn" id="4_a04qp"]
+[ext_resource type="PackedScene" uid="uid://clkkm4lnihfd3" path="res://ui/player_area.tscn" id="5_cjuek"]
+[ext_resource type="PackedScene" uid="uid://dpumi7eupplng" path="res://core/crystal.tscn" id="5_sjcnv"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_a04qp"]
+vertices = PackedVector2Array(1795.9922, 893.97656, -1790.0313, 890.0078, -1795.9609, -892.02344, 1795, -899.96875)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1806, -902, -1800, 900, 1806, 904, 1805, -910)])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3un6"]
-bg_color = Color(0.07058824, 0.1254902, 0.1254902, 1)
+bg_color = Color(0.07058824, 0.1254902, 0.1254902, 0.29411766)
 border_width_top = 5
 border_color = Color(0.14117648, 0.32156864, 0.23137255, 1)
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_a04qp"]
-vertices = PackedVector2Array(2379.3906, 1537.6172, -1821.8281, 1901.4297, -3207.6484, -1133.6484, 3600.5781, -2488.9297)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-3222, -1141, -1828, 1912, 2387, 1547, 3615, -2502)])
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sjcnv"]
 
 [node name="Game" type="Node2D" unique_id=1117438071]
 script = ExtResource("1_8xnxh")
@@ -30,6 +33,30 @@ region_rect = Rect2(0, 0, 1200, 600)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1237496742]
 script = ExtResource("2_5sg27")
 
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=875747490]
+navigation_polygon = SubResource("NavigationPolygon_a04qp")
+
+[node name="Crystal" parent="." unique_id=607622113 instance=ExtResource("5_sjcnv")]
+position = Vector2(-1500, 0)
+
+[node name="Crystal3" parent="." unique_id=546750743 instance=ExtResource("5_sjcnv")]
+position = Vector2(-1200, -500)
+
+[node name="Crystal4" parent="." unique_id=449016177 instance=ExtResource("5_sjcnv")]
+position = Vector2(-1200, 500)
+
+[node name="Crystal2" parent="." unique_id=1830736050 instance=ExtResource("5_sjcnv")]
+position = Vector2(1500, 0)
+team = false
+
+[node name="Crystal5" parent="." unique_id=2039139704 instance=ExtResource("5_sjcnv")]
+position = Vector2(1200, 500)
+team = false
+
+[node name="Crystal6" parent="." unique_id=13961038 instance=ExtResource("5_sjcnv")]
+position = Vector2(1200, -500)
+team = false
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1107887040]
 
 [node name="UIContainer" type="PanelContainer" parent="CanvasLayer" unique_id=264141552]
@@ -42,12 +69,38 @@ grow_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_d3un6")
 
-[node name="Troop" parent="." unique_id=1026544554 instance=ExtResource("4_a04qp")]
-position = Vector2(-1006, 60)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UIContainer" unique_id=296901395]
+layout_mode = 2
 
-[node name="Troop2" parent="." unique_id=647786002 instance=ExtResource("4_a04qp")]
-position = Vector2(205, 113)
+[node name="PlayerArea" parent="CanvasLayer/UIContainer/HBoxContainer" unique_id=937559062 instance=ExtResource("5_cjuek")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CanvasLayer/UIContainer/HBoxContainer" unique_id=652968993]
+layout_mode = 2
+theme_override_constants/separation = 148
+theme_override_styles/separator = SubResource("StyleBoxEmpty_sjcnv")
+
+[node name="PlayerArea2" parent="CanvasLayer/UIContainer/HBoxContainer" unique_id=1979563584 instance=ExtResource("5_cjuek")]
+layout_mode = 2
 team = false
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=875747490]
-navigation_polygon = SubResource("NavigationPolygon_a04qp")
+[node name="Player1Info" type="Label" parent="CanvasLayer" unique_id=1372685810]
+offset_left = 13.0
+offset_top = 11.0
+offset_right = 415.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 20
+text = "$0
+Selected spawnpoint: Middle
+Q to change spawnpoint"
+
+[node name="Player2Info" type="Label" parent="CanvasLayer" unique_id=2117644856]
+offset_left = 729.0
+offset_top = 11.0
+offset_right = 1141.0
+offset_bottom = 119.0
+theme_override_font_sizes/font_size = 20
+text = "$0
+Selected spawnpoint: Middle
+Q to change spawnpoint"
+horizontal_alignment = 2

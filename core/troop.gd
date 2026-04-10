@@ -1,67 +1,63 @@
 extends CharacterBody2D
-
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D
-
+@onready var anim = $AnimationPlayer
 @onready var attack_timer = $AttackTimer
-
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-
-@export var team = true # red is true blue is false
+@export var team = true
 
 var target = null
-var hp = 1.0
+var target_pos = Vector2.ZERO
 
+var hp = 1.0
 var type = "melee"
-var max_hp = 10.0
+var max_hp = 4.0
 var speed = 150.0
 var damage = 1.0
 var attack_cooldown = 0.7
-var melee_range = 40.0 # non ranged
-var ranged_range = 1.0 # ranged
+var attack_range = 50.0
 
 func _ready():
 	sprite.material = sprite.material.duplicate()
-	if team: 
-		sprite.material.set_shader_parameter("color", Color("b4202a")) 
-	else: 
-		sprite.material.set_shader_parameter("color", Color("285cc4")) 
-	
+	if team:
+		sprite.material.set_shader_parameter("color", Color("b4202a"))
+	else:
+		sprite.material.set_shader_parameter("color", Color("285cc4"))
+
 	fit_collider()
-	
 	attack_timer.wait_time = attack_cooldown
 	hp = max_hp
+	nav_agent.max_speed = speed
+
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
 func _physics_process(delta):
-	# check for death
 	if hp <= 0.0:
 		queue_free()
 	
-	# find target
-	nav_agent.target_position = find_target()
-	
-	# attack if possible
-	var dist_from_target = global_position.distance_to(target.global_position)
-	if type == "melee" or type == "rusher":
-		if dist_from_target < melee_range:
-			if attack_timer.is_stopped(): attack_timer.start()
-			return
-	attack_timer.stop()
-	
-	
-	# navigate
-	
-	var next_path_position: Vector2 = nav_agent.get_next_path_position()
+	find_target()
+	nav_agent.target_position = target_pos
 
+	var dist_from_target = global_position.distance_to(target_pos)
+	if dist_from_target < attack_range:
+		if attack_timer.is_stopped():
+			attack_timer.start()
+		nav_agent.set_velocity(Vector2.ZERO)
+		return
+
+	attack_timer.stop()
+
+	var next_path_position: Vector2 = nav_agent.get_next_path_position()
 	var direction: Vector2 = (next_path_position - global_position).normalized()
 	sprite.flip_h = direction.x > 0
-
-	velocity = direction * speed
-	move_and_slide()
-	
+	anim.play("walk")
 	z_index = int(global_position.y)
-	
-		
+
+	nav_agent.set_velocity(direction * speed)
+
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
+	move_and_slide()
 	
 func find_target():
 	var target_candidates = []
@@ -70,16 +66,16 @@ func find_target():
 		for entity in get_tree().get_nodes_in_group("entity"):
 			if team != entity.team: target_candidates.append(entity)
 	
-	var closest_dist = 9999999.0
+	var closest_dist = INF
 	var closest_candidate = null
 	for candidate in target_candidates:
-		var dist = candidate.global_position.distance_to(global_position)
+		var dist = candidate.collision.global_position.distance_to(global_position)
 		if dist < closest_dist:
 			closest_candidate = candidate
 			closest_dist = dist
 			
 	target = closest_candidate
-	return closest_candidate.global_position
+	target_pos = target.collision.global_position
 	
 func fit_collider():
 	var tex_size: Vector2 = sprite.texture.get_size()
@@ -98,5 +94,14 @@ func fit_collider():
 	)
 
 func _on_attack_timer_timeout() -> void:
-	print(target.hp)
-	target.hp -= damage
+	if type == "melee" or type == "rusher":
+		if target: target.hp -= damage
+	elif type == "ranged":
+		pass
+	elif type == "support":
+		pass
+	
+	if sprite.flip_h: anim.play("attack_right")
+	else: anim.play("attack_left")
+	
+	

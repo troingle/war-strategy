@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://clkkm4lnihfd3"]
+
+[ext_resource type="Script" uid="uid://bsq6fgb8ybjv4" path="res://core/player.gd" id="1_8bmc7"]
+[ext_resource type="PackedScene" uid="uid://djunj6ohf5v3h" path="res://ui/troop_icon.tscn" id="1_uuoen"]
+
+[node name="PlayerArea" type="MarginContainer" unique_id=937559062]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_8bmc7")
+
+[node name="TroopSpawnCooldown" type="Timer" parent="." unique_id=2063762033]
+wait_time = 0.16
+one_shot = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=900205867]
+layout_mode = 2
+
+[node name="SelectionInfo" type="Label" parent="VBoxContainer" unique_id=1288874478]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=2097615816]
+layout_mode = 2
+columns = 16
+
+[node name="TroopIcon1" parent="VBoxContainer/GridContainer" unique_id=1693912189 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon2" parent="VBoxContainer/GridContainer" unique_id=746385689 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon3" parent="VBoxContainer/GridContainer" unique_id=1064556911 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon4" parent="VBoxContainer/GridContainer" unique_id=1949253808 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon5" parent="VBoxContainer/GridContainer" unique_id=529644523 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon6" parent="VBoxContainer/GridContainer" unique_id=1398336483 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon7" parent="VBoxContainer/GridContainer" unique_id=1141755464 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon8" parent="VBoxContainer/GridContainer" unique_id=601831737 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon9" parent="VBoxContainer/GridContainer" unique_id=459725488 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon10" parent="VBoxContainer/GridContainer" unique_id=1182380722 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon11" parent="VBoxContainer/GridContainer" unique_id=1591062716 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon12" parent="VBoxContainer/GridContainer" unique_id=770845397 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon13" parent="VBoxContainer/GridContainer" unique_id=523421175 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon14" parent="VBoxContainer/GridContainer" unique_id=1165865523 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon15" parent="VBoxContainer/GridContainer" unique_id=1891419007 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon16" parent="VBoxContainer/GridContainer" unique_id=930687371 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon17" parent="VBoxContainer/GridContainer" unique_id=1202286023 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon18" parent="VBoxContainer/GridContainer" unique_id=1680422379 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon19" parent="VBoxContainer/GridContainer" unique_id=507830634 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon20" parent="VBoxContainer/GridContainer" unique_id=1144104406 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon21" parent="VBoxContainer/GridContainer" unique_id=882728220 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon22" parent="VBoxContainer/GridContainer" unique_id=515679225 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon23" parent="VBoxContainer/GridContainer" unique_id=1228628868 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon24" parent="VBoxContainer/GridContainer" unique_id=602305362 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon25" parent="VBoxContainer/GridContainer" unique_id=92385571 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon26" parent="VBoxContainer/GridContainer" unique_id=801044756 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon27" parent="VBoxContainer/GridContainer" unique_id=1526005363 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon28" parent="VBoxContainer/GridContainer" unique_id=317595009 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon29" parent="VBoxContainer/GridContainer" unique_id=707065643 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon30" parent="VBoxContainer/GridContainer" unique_id=1698846941 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon31" parent="VBoxContainer/GridContainer" unique_id=1597841579 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[node name="TroopIcon32" parent="VBoxContainer/GridContainer" unique_id=307467828 instance=ExtResource("1_uuoen")]
+layout_mode = 2
+
+[connection signal="timeout" from="TroopSpawnCooldown" to="." method="_on_troop_spawn_cooldown_timeout"]
